@@ -1,4 +1,4 @@
-package br.com.juhmaran.pet_flow_cloud.petservice;
+package br.com.juhmaran.pet_flow_cloud.petservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,15 +7,12 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class PetRequest {
-
-    private UUID petId; // Identificador único do animal
 
     private String name; // Nome do animal
 

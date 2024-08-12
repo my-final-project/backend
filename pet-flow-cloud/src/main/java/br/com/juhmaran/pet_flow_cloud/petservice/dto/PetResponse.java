@@ -1,12 +1,14 @@
-package br.com.juhmaran.pet_flow_cloud.petservice;
+package br.com.juhmaran.pet_flow_cloud.petservice.dto;
 
-import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Separar os DTOs para requisição e resposta ajuda a isolar a estrutura de dados do cliente e do servidor.
+ */
 @Getter
 @Setter
 @Builder
@@ -14,7 +16,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class PetResponse {
 
-    private UUID petId; // Identificador único do animal
+    private Long id; // Identificador único do animal
 
     private String name; // Nome do animal
 

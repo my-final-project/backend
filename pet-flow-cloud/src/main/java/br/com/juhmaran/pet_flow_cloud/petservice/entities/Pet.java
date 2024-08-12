@@ -1,11 +1,10 @@
-package br.com.juhmaran.pet_flow_cloud.petservice;
+package br.com.juhmaran.pet_flow_cloud.petservice.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -17,7 +16,8 @@ import java.util.UUID;
 public class Pet {
 
     @Id
-    private UUID uuid;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Geração automática de UUID
+    private Long id;
 
     @Column(nullable = false)
     private String name; // Nome do animal

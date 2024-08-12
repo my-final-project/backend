@@ -1,0 +1,26 @@
+### Listar todos os pets
+GET http://localhost:8081/pets
+Content-Type: application/json
+
+### Buscar por ID
+GET http://localhost:8081/pets/1
+Content-Type: application/json
+
+### Cadastrar
+POST http://localhost:8081/pets
+Content-Type: application/json
+
+{
+  "name": "Rex",
+  "species": "Dog",
+  "breed": "German Shepherd",
+  "dateOfBirth": "2018-06-01",
+  "sex": "Male",
+  "weight": 30.0,
+  "color": "Black",
+  "medicalHistory": [
+    "Vaccinated",
+    "Neutered"
+  ],
+  "observations": "Very friendly"
+}
