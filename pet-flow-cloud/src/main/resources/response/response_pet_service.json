@@ -1,0 +1,15 @@
+{
+  "id": 1,
+  "name": "Rex",
+  "species": "Dog",
+  "breed": "German Shepherd",
+  "dateOfBirth": "2018-06-01",
+  "sex": "Male",
+  "weight": 30.0,
+  "color": "Black",
+  "medicalHistory": [
+    "Vaccinated",
+    "Neutered"
+  ],
+  "observations": "Very friendly"
+}

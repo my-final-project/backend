@@ -1,0 +1,30 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: pet-flow-cloud
+  devtools:
+    add-properties: false
+  datasource:
+    url: jdbc:mysql://localhost:3306/petflowcloud_database?createDatabaseIfNotExist=true&serverTimezone=UTC
+    username: root
+    password: root
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    open-in-view: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+logging:
+  file:
+    name: pet_flow_cloud.log
+  level:
+    web: DEBUG
+    org.springframework.boot: DEBUG
+    br.com.juhmaran.pet_flow_cloud: INFO
