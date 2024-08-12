@@ -1,0 +1,19 @@
+### Actuator
+GET http://localhost:8081/actuator
+Content-Type: application/json
+
+### Actuator health
+GET http://localhost:8081/actuator/health
+Content-Type: application/json
+
+### Actuator Info
+GET http://localhost:8081/actuator/info
+Content-Type: application/json
+
+### Actuator loggers
+GET http://localhost:8081/actuator/loggers
+Content-Type: application/json
+
+### Actuator metrics
+GET http://localhost:8081/actuator/metrics
+Content-Type: application/json
