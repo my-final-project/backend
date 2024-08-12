@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  db:
+    image: mysql:8.0.30
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: petflowcloud_database
+    ports:
+      - '3306:3306'
+    networks:
+      - petflowcloud-network
+    volumes:
+      - db-data:/var/lib/mysql
+  petflowcloud:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/petflowcloud_database?createDatabaseIfNotExist=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    ports:
+      - '8081:8081'
+    depends_on:
+      - db
+    networks:
+      - petflowcloud-network
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 5
+
+networks:
+  petflowcloud-network:
+    driver: bridge
+
+volumes:
+  db-data:
