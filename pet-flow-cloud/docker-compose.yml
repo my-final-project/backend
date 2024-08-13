@@ -5,8 +5,8 @@ services:
     image: mysql:8.0.30
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
+#      MYSQL_USER: root
+#      MYSQL_PASSWORD: root
       MYSQL_DATABASE: petflowcloud_database
     ports:
       - '3306:3306'

@@ -1,6 +1,6 @@
-package br.com.juhmaran.pet_flow_cloud.petservice.repositories;
+package br.com.juhmaran.pet_flow_cloud.pets.repositories;
 
-import br.com.juhmaran.pet_flow_cloud.petservice.entities.Pet;
+import br.com.juhmaran.pet_flow_cloud.pets.entities.Pet;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

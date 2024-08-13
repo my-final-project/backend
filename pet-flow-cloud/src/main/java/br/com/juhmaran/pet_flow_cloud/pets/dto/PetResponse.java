@@ -1,18 +1,24 @@
-package br.com.juhmaran.pet_flow_cloud.petservice.dto;
+package br.com.juhmaran.pet_flow_cloud.pets.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.List;
 
-@Data
+/**
+ * Separar os DTOs para requisição e resposta ajuda a isolar a estrutura de dados do cliente e do servidor.
+ */
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PetRequest {
+public class PetResponse {
+
+    private Long id; // Identificador único do animal
 
     private String name; // Nome do animal
 
@@ -33,5 +39,11 @@ public class PetRequest {
 //    private List<UUID> owners; // Lista de IDs de donos associados ao animal
 
     private String observations; // Observações adicionais sobre o animal
+
+    @CreationTimestamp
+    private OffsetDateTime createdAt;
+
+    @UpdateTimestamp
+    private OffsetDateTime updatedAt;
 
 }

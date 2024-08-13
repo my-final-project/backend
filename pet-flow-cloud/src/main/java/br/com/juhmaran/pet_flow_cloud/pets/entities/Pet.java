@@ -1,9 +1,12 @@
-package br.com.juhmaran.pet_flow_cloud.petservice.entities;
+package br.com.juhmaran.pet_flow_cloud.pets.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Getter
@@ -40,7 +43,7 @@ public class Pet {
     @Column
     private String color; // Cor do animal
 
-    @ElementCollection(fetch = FetchType.LAZY)
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> medicalHistory; // Histórico médico do animal
 
 //    @ManyToMany
@@ -53,5 +56,12 @@ public class Pet {
 
     @Column
     private String observations; // Observações adicionais sobre o animal
+
+    @CreationTimestamp
+    @Column(updatable = false)
+    private OffsetDateTime createdAt;
+
+    @UpdateTimestamp
+    private OffsetDateTime updatedAt;
 
 }
