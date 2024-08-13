@@ -1,15 +1,14 @@
-package br.com.juhmaran.pet_flow_cloud.petservice.services;
+package br.com.juhmaran.pet_flow_cloud.pets.services;
 
-import br.com.juhmaran.pet_flow_cloud.petservice.dto.PetRequest;
-import br.com.juhmaran.pet_flow_cloud.petservice.dto.PetResponse;
-import br.com.juhmaran.pet_flow_cloud.petservice.entities.Pet;
-import br.com.juhmaran.pet_flow_cloud.petservice.mapping.PetMapper;
-import br.com.juhmaran.pet_flow_cloud.petservice.repositories.PetRepository;
+import br.com.juhmaran.pet_flow_cloud.pets.dto.PetRequest;
+import br.com.juhmaran.pet_flow_cloud.pets.dto.PetResponse;
+import br.com.juhmaran.pet_flow_cloud.pets.entities.Pet;
+import br.com.juhmaran.pet_flow_cloud.pets.mapping.PetMapper;
+import br.com.juhmaran.pet_flow_cloud.pets.repositories.PetRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Encapsula a lógica de negócios e interage com o repositório

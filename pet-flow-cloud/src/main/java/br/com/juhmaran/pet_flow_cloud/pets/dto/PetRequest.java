@@ -1,22 +1,18 @@
-package br.com.juhmaran.pet_flow_cloud.petservice.dto;
+package br.com.juhmaran.pet_flow_cloud.pets.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
-/**
- * Separar os DTOs para requisição e resposta ajuda a isolar a estrutura de dados do cliente e do servidor.
- */
-@Getter
-@Setter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PetResponse {
-
-    private Long id; // Identificador único do animal
+public class PetRequest {
 
     private String name; // Nome do animal
 

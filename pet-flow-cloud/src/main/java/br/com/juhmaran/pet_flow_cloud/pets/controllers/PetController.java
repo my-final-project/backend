@@ -1,15 +1,14 @@
-package br.com.juhmaran.pet_flow_cloud.petservice.controllers;
+package br.com.juhmaran.pet_flow_cloud.pets.controllers;
 
-import br.com.juhmaran.pet_flow_cloud.petservice.dto.PetRequest;
-import br.com.juhmaran.pet_flow_cloud.petservice.dto.PetResponse;
-import br.com.juhmaran.pet_flow_cloud.petservice.services.PetService;
+import br.com.juhmaran.pet_flow_cloud.pets.dto.PetRequest;
+import br.com.juhmaran.pet_flow_cloud.pets.dto.PetResponse;
+import br.com.juhmaran.pet_flow_cloud.pets.services.PetService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Define os endpoints REST e usa o serviço para realizar operações

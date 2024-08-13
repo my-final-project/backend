@@ -1,8 +1,8 @@
-package br.com.juhmaran.pet_flow_cloud.petservice.mapping;
+package br.com.juhmaran.pet_flow_cloud.pets.mapping;
 
-import br.com.juhmaran.pet_flow_cloud.petservice.dto.PetRequest;
-import br.com.juhmaran.pet_flow_cloud.petservice.dto.PetResponse;
-import br.com.juhmaran.pet_flow_cloud.petservice.entities.Pet;
+import br.com.juhmaran.pet_flow_cloud.pets.dto.PetRequest;
+import br.com.juhmaran.pet_flow_cloud.pets.dto.PetResponse;
+import br.com.juhmaran.pet_flow_cloud.pets.entities.Pet;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
