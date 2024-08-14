@@ -1,5 +1,4 @@
 FROM amazoncorretto:21
-LABEL authors="juliane.maran"
 
 WORKDIR /app
 
