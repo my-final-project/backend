@@ -1,7 +1,9 @@
 package br.com.juhmaran.pet_flow_cloud.exceptions.handlers;
 
 import br.com.juhmaran.pet_flow_cloud.exceptions.dto.ExceptionResponse;
+import br.com.juhmaran.pet_flow_cloud.exceptions.runtimes.EmailSendingException;
 import br.com.juhmaran.pet_flow_cloud.exceptions.runtimes.ResourceNotFoundException;
+import br.com.juhmaran.pet_flow_cloud.exceptions.runtimes.ServiceException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
@@ -66,6 +68,23 @@ public class GlobalExceptionHandler {
                 .build();
 
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler({
+            ServiceException.class,
+            EmailSendingException.class
+    })
+    public final ResponseEntity<ExceptionResponse> handleServiceException(RuntimeException ex) {
+        log.error("Erro de serviço: {}", ex.getMessage());
+
+        ExceptionResponse response = ExceptionResponse.builder()
+                .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .error(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
+                .message(ex.getMessage())
+                .errors(List.of(ex.getMessage()))
+                .build();
+
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }
