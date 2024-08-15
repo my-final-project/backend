@@ -1,16 +1,16 @@
 package br.com.juhmaran.pet_flow_cloud.exceptions.runtimes;
 
-public class ServiceException extends RuntimeException {
+public class PasswordsDoNotMatchException extends RuntimeException {
 
-    public ServiceException() {
+    public PasswordsDoNotMatchException() {
 
     }
 
-    public ServiceException(String message) {
+    public PasswordsDoNotMatchException(String message) {
         super(message);
     }
 
-    public ServiceException(String message, Throwable cause) {
+    public PasswordsDoNotMatchException(String message, Throwable cause) {
         super(message, cause);
     }
 

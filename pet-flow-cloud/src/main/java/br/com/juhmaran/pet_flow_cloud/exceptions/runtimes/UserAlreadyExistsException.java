@@ -1,16 +1,16 @@
 package br.com.juhmaran.pet_flow_cloud.exceptions.runtimes;
 
-public class PasswordsDoNotMatchException extends RuntimeException {
+public class UserAlreadyExistsException extends RuntimeException {
 
-    public PasswordsDoNotMatchException() {
+    public UserAlreadyExistsException() {
 
     }
 
-    public PasswordsDoNotMatchException(String message) {
+    public UserAlreadyExistsException(String message) {
         super(message);
     }
 
-    public PasswordsDoNotMatchException(String message, Throwable cause) {
+    public UserAlreadyExistsException(String message, Throwable cause) {
         super(message, cause);
     }
 
