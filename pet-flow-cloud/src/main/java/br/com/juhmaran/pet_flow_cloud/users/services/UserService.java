@@ -1,12 +1,20 @@
 package br.com.juhmaran.pet_flow_cloud.users.services;
 
+import br.com.juhmaran.pet_flow_cloud.exceptions.runtimes.EmailSendingException;
+import br.com.juhmaran.pet_flow_cloud.exceptions.runtimes.PasswordsDoNotMatchException;
 import br.com.juhmaran.pet_flow_cloud.exceptions.runtimes.ResourceNotFoundException;
+import br.com.juhmaran.pet_flow_cloud.exceptions.runtimes.UserAlreadyExistsException;
 import br.com.juhmaran.pet_flow_cloud.users.dto.UpdateUserRequest;
+import br.com.juhmaran.pet_flow_cloud.users.dto.UserRequest;
+import br.com.juhmaran.pet_flow_cloud.users.dto.UserResponse;
 import br.com.juhmaran.pet_flow_cloud.users.entities.User;
+import br.com.juhmaran.pet_flow_cloud.users.mapping.UserMapper;
 import br.com.juhmaran.pet_flow_cloud.users.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
@@ -19,7 +27,41 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
 
+    JavaMailSender mailSender;
+    private final UserMapper userMapper;
     private final UserRepository userRepository;
+
+    public UserResponse registerUser(UserRequest userRequest) {
+
+        if (!userRequest.getPassword().equals(userRequest.getConfirmPassword())) {
+            throw new PasswordsDoNotMatchException("A confirmação de senha não corresponde à senha.");
+        }
+
+        if (userRepository.existsByEmail(userRequest.getEmail()) || userRepository.existsByCpf(userRequest.getCpf())) {
+            throw new UserAlreadyExistsException("E-mail ou CPF já cadastrado.");
+        }
+
+        User user = userMapper.toUser(userRequest);
+        user.setActive(true);
+
+        User savedUser = userRepository.save(user);
+        sendWelcomeEmail(savedUser);
+
+        return userMapper.toUserResponse(savedUser);
+
+    }
+
+    private void sendWelcomeEmail(User user) {
+        try {
+            var message = new SimpleMailMessage();
+            message.setTo(user.getEmail());
+            message.setSubject("Bem-vindo(a)!");
+            message.setText("Olá, " + user.getName() + "!");
+            mailSender.send(message);
+        } catch (EmailSendingException e) {
+            throw new EmailSendingException("Falha ao enviar o e-mail de boas vindas!");
+        }
+    }
 
     @Transactional
     public void updateUser(String email, UpdateUserRequest request) {
