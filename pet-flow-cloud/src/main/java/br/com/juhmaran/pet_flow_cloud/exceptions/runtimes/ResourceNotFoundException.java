@@ -2,9 +2,6 @@ package br.com.juhmaran.pet_flow_cloud.exceptions.runtimes;
 
 public class ResourceNotFoundException extends RuntimeException {
 
-    public ResourceNotFoundException() {
-    }
-
     public ResourceNotFoundException(String message) {
         super(message);
     }
@@ -16,4 +13,5 @@ public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(Throwable cause) {
         super(cause);
     }
+
 }
