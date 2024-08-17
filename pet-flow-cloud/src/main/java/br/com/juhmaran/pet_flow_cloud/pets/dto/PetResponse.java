@@ -1,15 +1,14 @@
 package br.com.juhmaran.pet_flow_cloud.pets.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
-import java.util.List;
 
 /**
- * Separar os DTOs para requisição e resposta ajuda a isolar a estrutura de dados do cliente e do servidor.
+ * Representa o animal de estimação do usuário
  */
 @Getter
 @Setter
@@ -18,32 +17,26 @@ import java.util.List;
 @NoArgsConstructor
 public class PetResponse {
 
-    private Long id; // Identificador único do animal
+    private Long id;
 
-    private String name; // Nome do animal
+    private String name;
 
-    private String species; // Espécie do animal
+    private String species; // espécie
 
-    private String breed; // Raça do animal
+    private String breed; // raça
 
-    private LocalDate dateOfBirth; // Data de nascimento do animal
+    private String color;
 
-    private String sex; // Sexo do animal
+    @JsonProperty("date_of_birth")
+    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
+    private LocalDate dateOfBirth;
 
-    private Double weight; // Peso atual do animal
+    @JsonProperty("created_date")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", shape = JsonFormat.Shape.STRING)
+    private OffsetDateTime createdDate;
 
-    private String color; // Cor do animal
-
-    private List<String> medicalHistory; // Histórico médico do animal
-
-//    private List<UUID> owners; // Lista de IDs de donos associados ao animal
-
-    private String observations; // Observações adicionais sobre o animal
-
-    @CreationTimestamp
-    private OffsetDateTime createdAt;
-
-    @UpdateTimestamp
-    private OffsetDateTime updatedAt;
+    @JsonProperty("last_modified_date")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", shape = JsonFormat.Shape.STRING)
+    private OffsetDateTime lastModifiedDate;
 
 }

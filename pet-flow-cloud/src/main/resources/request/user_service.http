@@ -1,5 +1,6 @@
 ### Cadastrar usuário e enviar email de confirmação
 POST http://localhost:8081/users
+Accept-Language: en
 Content-Type: application/json
 
 {

@@ -1,0 +1,16 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: pet-flow-cloud
+  jpa:
+    open-in-view: true
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+
+  #logging:
+  #  org.testcontainers: DEBUG
+
+  

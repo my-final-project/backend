@@ -1,0 +1,20 @@
+@startuml
+
+!define RECTANGLE class
+left to right direction
+
+actor User as U
+
+usecase "Create Pet" as UC_CreatePet
+usecase "Update Pet" as UC_UpdatePet
+usecase "Search Pets" as UC_SearchPets
+usecase "Get Pet by ID" as UC_GetPetById
+usecase "Delete Pet" as UC_DeletePet
+
+U --> UC_CreatePet : "Submits Pet Data"
+U --> UC_UpdatePet : "Updates Pet Data"
+U --> UC_SearchPets : "Searches for Pets"
+U --> UC_GetPetById : "Fetches Pet by ID"
+U --> UC_DeletePet : "Deletes a Pet"
+
+@enduml

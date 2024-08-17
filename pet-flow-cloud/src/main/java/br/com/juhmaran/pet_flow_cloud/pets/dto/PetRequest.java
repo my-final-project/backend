@@ -1,37 +1,39 @@
 package br.com.juhmaran.pet_flow_cloud.pets.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
+import lombok.*;
 
 import java.time.LocalDate;
-import java.util.List;
 
-@Data
+/**
+ * Representa o animal de estimação do usuário
+ */
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class PetRequest {
 
-    private String name; // Nome do animal
+    @NotBlank(message = "O campo nome não pode ser nulo ou em branco.")
+    @Size(min = 3, max = 80, message = "O campo nome deve ter entre 3 e 80 caracteres.")
+    private String name;
 
-    private String species; // Espécie do animal
+    @NotBlank(message = "O campo espécie não pode ser nulo ou em branco.")
+    @Size(max = 80, message = "O campo espécie deve ter no máximo 80 caracteres.")
+    private String species; // espécie
 
-    private String breed; // Raça do animal
+    @Size(max = 80, message = "O campo raça deve ter no máximo 80 caracteres.")
+    private String breed; // raça
 
-    private LocalDate dateOfBirth; // Data de nascimento do animal
+    @Size(max = 20, message = "O campo cor deve ter no máximo 20 caracteres.")
+    private String color;
 
-    private String sex; // Sexo do animal
-
-    private Double weight; // Peso atual do animal
-
-    private String color; // Cor do animal
-
-    private List<String> medicalHistory; // Histórico médico do animal
-
-//    private List<UUID> owners; // Lista de IDs de donos associados ao animal
-
-    private String observations; // Observações adicionais sobre o animal
+    @Past(message = "A data de nascimento deve estar no passado.")
+    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
+    private LocalDate dateOfBirth;
 
 }

@@ -1,14 +1,19 @@
 package br.com.juhmaran.pet_flow_cloud.pets.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Past;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
-import java.util.List;
 
+/**
+ * Representa o animal de estimação do usuário
+ */
 @Getter
 @Setter
 @Builder
@@ -16,52 +21,37 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "pets")
-public class Pet {
+public class Pet implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Geração automática de UUID
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String name; // Nome do animal
+    @Column(nullable = false, length = 80)
+    private String name;
 
-    @Column(nullable = false)
-    private String species; // Espécie do animal
+    @Column(nullable = false, length = 80)
+    private String species; // espécie
 
-    @Column
-    private String breed; // Raça do animal
+    @Column(length = 80)
+    private String breed; // raça
 
-    @Column
-    private LocalDate dateOfBirth; // Data de nascimento do animal
+    @Column(length = 20)
+    private String color;
 
-    @Column
-    private String sex; // Sexo do animal
+    @Transient
+    private int age;
 
-    @Column
-    private Double weight; // Peso atual do animal
+    @Past(message = "A data de nascimento deve estar no passado.")
+    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
+    private LocalDate dateOfBirth;
 
-    @Column
-    private String color; // Cor do animal
+    @CreatedDate
+    @Column(name = "created_date", updatable = false)
+    private OffsetDateTime createdDate;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> medicalHistory; // Histórico médico do animal
-
-//    @ManyToMany
-//    @JoinTable(
-//            name = "pet_owners",
-//            joinColumns = @JoinColumn(name = "pet_id"),
-//            inverseJoinColumns = @JoinColumn(name = "owner_id")
-//    )
-//    private List<UUID> owners; // Lista de IDs de donos associados ao animal
-
-    @Column
-    private String observations; // Observações adicionais sobre o animal
-
-    @CreationTimestamp
-    @Column(updatable = false)
-    private OffsetDateTime createdAt;
-
-    @UpdateTimestamp
-    private OffsetDateTime updatedAt;
+    @LastModifiedDate
+    @Column(name = "last_modified_date")
+    private OffsetDateTime lastModifiedDate;
 
 }
