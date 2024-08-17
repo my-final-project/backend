@@ -1,4 +1,4 @@
-package br.com.juhmaran.pet_flow_cloud.service;
+package br.com.juhmaran.pet_flow_cloud.service.dto;
 
 import lombok.*;
 

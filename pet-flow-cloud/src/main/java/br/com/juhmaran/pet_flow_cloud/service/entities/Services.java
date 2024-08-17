@@ -19,7 +19,7 @@ import java.time.OffsetDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "services")
-public class Service implements Serializable {
+public class Services implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

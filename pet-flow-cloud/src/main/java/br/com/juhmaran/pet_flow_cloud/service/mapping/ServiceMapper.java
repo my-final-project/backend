@@ -1,5 +1,8 @@
-package br.com.juhmaran.pet_flow_cloud.service;
+package br.com.juhmaran.pet_flow_cloud.service.mapping;
 
+import br.com.juhmaran.pet_flow_cloud.service.dto.ServiceRequest;
+import br.com.juhmaran.pet_flow_cloud.service.dto.ServiceResponse;
+import br.com.juhmaran.pet_flow_cloud.service.entities.Services;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
@@ -15,10 +18,10 @@ public interface ServiceMapper {
     ServiceMapper INSTANCE = Mappers.getMapper(ServiceMapper.class);
 
     @Mapping(target = "id", ignore = true)
-    Service toEntity(ServiceRequest serviceRequest);
+    Services toEntity(ServiceRequest serviceRequest);
 
-    ServiceResponse toResponse(Service service);
+    ServiceResponse toResponse(Services services);
 
-    List<ServiceResponse> toResponseList(List<Service> services);
+    List<ServiceResponse> toResponseList(List<Services> services);
 
 }
