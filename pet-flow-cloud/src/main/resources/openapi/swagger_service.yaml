@@ -1,0 +1,152 @@
+openapi: 3.0.3
+info:
+  title: API de Serviços
+  description: API para gerenciamento de serviços
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8081'
+tags:
+  - name: Service
+    description: Operações relacionadas a consultas
+paths:
+  /services:
+    get:
+      tags:
+        - Service
+      summary: Lista todos os serviços
+      responses:
+        '200':
+          description: Lista de serviços
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ServiceResponse'
+    post:
+      tags:
+        - Service
+      summary: Cria um novo serviço
+      requestBody:
+        description: Dados do novo serviço
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceRequest'
+      responses:
+        '201':
+          description: Serviço criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceResponse'
+  /services/{id}:
+    get:
+      tags:
+        - Service
+      summary: Obtém um serviço pelo ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Serviço encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceResponse'
+        '404':
+          description: Serviço não encontrado
+    put:
+      tags:
+        - Service
+      summary: Atualiza um serviço existente
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Dados do serviço a serem atualizados
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceRequest'
+      responses:
+        '200':
+          description: Serviço atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceResponse'
+        '404':
+          description: Serviço não encontrado
+    delete:
+      tags:
+        - Service
+      summary: Deleta um serviço pelo ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Serviço deletado com sucesso
+        '404':
+          description: Serviço não encontrado
+components:
+  schemas:
+    ServiceRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Nome do serviço
+          example: Banho e Tosa
+        price:
+          type: number
+          format: double
+          description: Preço do serviço
+          example: 50.0
+        description:
+          type: string
+          description: Descrição do serviço
+          example: Serviço completo de banho e tosa para pets
+    ServiceResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID do serviço
+          example: 1
+        name:
+          type: string
+          description: Nome do serviço
+          example: Banho e Tosa
+        price:
+          type: number
+          format: double
+          description: Preço do serviço
+          example: 50.0
+        description:
+          type: string
+          description: Descrição do serviço
+          example: Serviço completo de banho e tosa para pets
+        created_date:
+          type: string
+          format: date-time
+          description: Data de criação do serviço
+          example: 2023-08-17T19:06:00Z
+        last_modified_date:
+          type: string
+          format: date-time
+          description: Data da última modificação do serviço
+          example: 2023-08-17T19:06:00Z

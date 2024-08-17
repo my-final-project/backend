@@ -1,0 +1,158 @@
+openapi: 3.0.3
+info:
+  title: API de usuários
+  description: API para gerenciamento de usuários
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8081'
+tags:
+  - name: User
+    description: Operações relacionadas a usuários
+paths:
+  /users:
+    get:
+      tags:
+        - User
+      summary: Lista todos os usuários
+      responses:
+        '200':
+          description: Lista de usuários
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserResponse'
+    post:
+      tags:
+        - User
+      summary: Cria um novo usuário
+      requestBody:
+        description: Dados do novo usuário
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+      responses:
+        '201':
+          description: Usuário criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+  /users/{id}:
+    get:
+      tags:
+        - User
+      summary: Obtém um usuário pelo ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Usuário encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '404':
+          description: Usuário não encontrado
+    put:
+      tags:
+        - User
+      summary: Atualiza um usuário existente
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Dados do usuário a serem atualizados
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+      responses:
+        '200':
+          description: Usuário atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '404':
+          description: Usuário não encontrado
+    delete:
+      tags:
+        - User
+      summary: Deleta um usuário pelo ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Usuário deletado com sucesso
+        '404':
+          description: Usuário não encontrado
+components:
+  schemas:
+    UserRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Nome do usuário
+          example: João Silva
+        cpf:
+          type: string
+          description: CPF do usuário
+          example: 12345678901
+        email:
+          type: string
+          description: E-mail do usuário
+          example: joao.silva@example.com
+        password:
+          type: string
+          description: Senha do usuário
+          example: senha123
+        confirmPassword:
+          type: string
+          description: Confirmação da senha do usuário
+          example: senha123
+    UserResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID do usuário
+          example: 1
+        name:
+          type: string
+          description: Nome do usuário
+          example: João Silva
+        cpf:
+          type: string
+          description: CPF do usuário
+          example: 12345678901
+        email:
+          type: string
+          description: E-mail do usuário
+          example: joao.silva@example.com
+        created_date:
+          type: string
+          format: date-time
+          description: Data de criação do usuário
+          example: 2023-08-17T19:06:00Z
+        last_modified_date:
+          type: string
+          format: date-time
+          description: Data da última modificação do usuário
+          example: 2023-08-17T19:06:00Z

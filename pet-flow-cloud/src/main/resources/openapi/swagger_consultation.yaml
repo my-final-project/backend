@@ -1,0 +1,160 @@
+openapi: 3.0.3
+info:
+  title: API de Consultas
+  description: API para gerenciamento de consultas veterinárias.
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8081'
+tags:
+  - name: Consultation
+    description: Operações relacionadas a consultas veterinárias
+paths:
+  /consultations:
+    get:
+      tags:
+        - Consultation
+      summary: Lista todas as consultas
+      responses:
+        '200':
+          description: Lista de consultas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConsultationResponse'
+    post:
+      tags:
+        - Consultation
+      summary: Cria uma nova consulta
+      requestBody:
+        description: Dados da nova consulta
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsultationRequest'
+      responses:
+        '201':
+          description: Consulta criada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsultationResponse'
+  /consultations/{id}:
+    get:
+      tags:
+        - Consultation
+      summary: Obtém uma consulta pelo ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Consulta encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsultationResponse'
+        '404':
+          description: Consulta não encontrada
+    put:
+      tags:
+        - Consultation
+      summary: Atualiza uma consulta existente
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Dados da consulta a serem atualizados
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsultationRequest'
+      responses:
+        '200':
+          description: Consulta atualizada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsultationResponse'
+        '404':
+          description: Consulta não encontrada
+    delete:
+      tags:
+        - Consultation
+      summary: Deleta uma consulta pelo ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Consulta deletada com sucesso
+        '404':
+          description: Consulta não encontrada
+components:
+  schemas:
+    ConsultationRequest:
+      type: object
+      properties:
+        petId:
+          type: integer
+          description: ID do pet
+          example: 2
+        veterinarianId:
+          type: integer
+          description: ID do veterinário
+          example: 3
+        consultationDate:
+          type: string
+          format: date-time
+          description: Data da consulta
+          example: 2023-08-17T19:06:00Z
+        notes:
+          type: string
+          description: Notas da consulta
+          example: "Consulta de rotina"
+    ConsultationResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID da consulta
+          example: 1
+        petId:
+          type: integer
+          description: ID do pet
+          example: 2
+        veterinarianId:
+          type: integer
+          description: ID do veterinário
+          example: 3
+        consultationDate:
+          type: string
+          format: date-time
+          description: Data da consulta
+          example: 2023-08-17T19:06:00Z
+        notes:
+          type: string
+          description: Notas da consulta
+          example: "Consulta de rotina"
+        created_date:
+          type: string
+          format: date-time
+          description: Data de criação da consulta
+          example: 2023-08-17T19:06:00Z
+        last_modified_date:
+          type: string
+          format: date-time
+          description: Data da última modificação da consulta
+          example: 2023-08-17T19:06:00Z

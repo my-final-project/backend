@@ -1,0 +1,31 @@
+### Cadastrar consulta
+POST http://localhost:8081/consultations
+Content-Type: application/json
+
+{
+  "petId": 1,
+  "veterinarianId": 1,
+  "consultationDate": "2024-08-18T10:00:00Z",
+  "notes": "Consulta de rotina"
+}
+
+### Obter todos as consultas
+GET http://localhost:8081/consultations
+
+### Obeter consulta por ID
+GET http://localhost:8081/consultations/{id}
+
+### Atualizar consulta
+PUT http://localhost:8081/consultations/{id}
+Content-Type: application/json
+
+{
+  "petId": 1,
+  "veterinarianId": 1,
+  "consultationDate": "2024-08-18T12:00:00Z",
+  "notes": "Consulta de retorno"
+}
+
+### Deletar consulta
+DELETE http://localhost:8081/consultations/{id}
+

@@ -1,0 +1,32 @@
+### Cadastrar appointment
+POST http://localhost:8081/appointments
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "petId": 1,
+  "serviceId": 1,
+  "appointmentDate": "2024-08-18T10:00:00Z",
+  "status": "Scheduled"
+}
+
+### Obter todos os appointments
+GET http://localhost:8081/appointments
+
+### Obeter appointment por ID
+GET http://localhost:8081/appointments /{id}
+
+### Atualizar appointment
+PUT http://localhost:8081/appointments /{id}
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "petId": 1,
+  "serviceId": 1,
+  "appointmentDate": "2024-08-18T12:00:00Z",
+  "status": "Completed"
+}
+
+### Deletar appointment
+DELETE http://localhost:8081/appointments /{id}
