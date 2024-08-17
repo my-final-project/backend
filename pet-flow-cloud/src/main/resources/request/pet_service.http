@@ -1,26 +1,33 @@
-### Listar todos os pets
-GET http://localhost:8081/pets
-Content-Type: application/json
-
-### Buscar por ID
-GET http://localhost:8081/pets/1
-Content-Type: application/json
-
-### Cadastrar
+### Criar um novo pet
 POST http://localhost:8081/pets
 Content-Type: application/json
 
 {
-  "name": "Rex",
+  "name": "Buddy",
   "species": "Dog",
-  "breed": "German Shepherd",
-  "dateOfBirth": "2018-06-01",
-  "sex": "Male",
-  "weight": 30.0,
-  "color": "Black",
-  "medicalHistory": [
-    "Vaccinated",
-    "Neutered"
-  ],
-  "observations": "Very friendly"
+  "breed": "Golden Retriever",
+  "color": "Golden",
+  "dateOfBirth": "2015-06-25"
 }
+
+### Buscar um Pet pelo ID
+GET http://localhost:8081/pets/1
+Content-Type: application/json
+
+### Buscar Pets com filtros e paginação
+GET http://localhost:8081/pets/search
+
+### Atualizar um Pet
+PUT http://localhost:8081/pets/1
+Content-Type: application/json
+
+{
+  "name": "Buddy Updated",
+  "species": "Dog",
+  "breed": "Golden Retriever",
+  "color": "Golden",
+  "dateOfBirth": "2015-06-25"
+}
+
+### Atualizar um Pet
+DELETE http://localhost:8081/pets/1
