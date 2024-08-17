@@ -1,35 +1,31 @@
-### Cadastrar usuário e enviar email de confirmação
-POST http://localhost:8081/users
+### Cadastrar consulta
+POST http://localhost:8081/consultations
 Content-Type: application/json
 
 {
-  "name": "Juliane Maran",
-  "email": "julianemaran@gmail.com",
-  "password": "P4$$w0rd",
-  "confirmPassword": "P4$$w0rd",
-  "cpf": "060.690.439-52",
-  "phoneNumber": "+5541992199488"
+  "petId": 1,
+  "veterinarianId": 1,
+  "consultationDate": "2024-08-18T10:00:00Z",
+  "notes": "Consulta de rotina"
 }
 
-### Obter todos os usuários
-GET http://localhost:8081/users
+### Obter todos as consultas
+GET http://localhost:8081/consultations
 
-### Obeter usuário por ID
-GET http://localhost:8081/users/{id}
+### Obeter consulta por ID
+GET http://localhost:8081/consultations/{id}
 
-### Atualizar usuário
-PUT http://localhost:8081/users/{id}
+### Atualizar consulta
+PUT http://localhost:8081/consultations/{id}
 Content-Type: application/json
 
 {
-  "name": "Juliane Maran",
-  "email": "julianemaran@gmail.com",
-  "password": "P4$$w0rd",
-  "confirmPassword": "P4$$w0rd",
-  "cpf": "060.690.439-52",
-  "phoneNumber": "+5541992199488"
+  "petId": 1,
+  "veterinarianId": 1,
+  "consultationDate": "2024-08-18T12:00:00Z",
+  "notes": "Consulta de retorno"
 }
 
-### Deletar usuário
-DELETE http://localhost:8081/users/{id}
+### Deletar consulta
+DELETE http://localhost:8081/consultations/{id}
 
