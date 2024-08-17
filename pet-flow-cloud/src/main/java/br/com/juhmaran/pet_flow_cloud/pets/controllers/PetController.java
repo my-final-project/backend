@@ -3,18 +3,19 @@ package br.com.juhmaran.pet_flow_cloud.pets.controllers;
 import br.com.juhmaran.pet_flow_cloud.pets.dto.PetRequest;
 import br.com.juhmaran.pet_flow_cloud.pets.dto.PetResponse;
 import br.com.juhmaran.pet_flow_cloud.pets.services.PetService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.time.LocalDate;
 
-/**
- * Define os endpoints REST e usa o serviço para realizar operações
- *
- * @author juliane.maran
- */
+@Slf4j
 @RestController
 @RequestMapping("/pets")
 @RequiredArgsConstructor
@@ -22,34 +23,51 @@ public class PetController {
 
     private final PetService petService;
 
-    @GetMapping
-    public ResponseEntity<List<PetResponse>> getAllPets() {
-        return ResponseEntity.ok(petService.getAllPets());
-    }
-
-    @GetMapping("/{petId}")
-    public ResponseEntity<PetResponse> getPetById(@PathVariable(name = "petId") Long petId) {
-        return ResponseEntity.ok(petService.getPetById(petId));
-    }
-
     @PostMapping
-    public ResponseEntity<PetResponse> createPet(@RequestBody PetRequest petRequest) {
+    public ResponseEntity<PetResponse> createPet(@Valid @RequestBody PetRequest petRequest) {
+        log.debug("Received request to create pet: {}", petRequest);
         PetResponse petResponse = petService.createPet(petRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).body(petResponse);
+        log.info("Pet created successfully with response: {}", petResponse);
+        return new ResponseEntity<>(petResponse, HttpStatus.CREATED);
     }
 
-
-    @PutMapping("/{petId}")
-    public ResponseEntity<PetResponse> updatePet(@PathVariable(name = "petId") Long petId,
-                                                 @RequestBody PetRequest petRequest) {
-        PetResponse petResponse = petService.updatePet(petId, petRequest);
+    @GetMapping("/{id}")
+    public ResponseEntity<PetResponse> getPetById(@PathVariable Long id) {
+        log.debug("Received request to get pet by id: {}", id);
+        PetResponse petResponse = petService.getPetById(id);
+        log.info("Pet retrieved successfully with id: {}", id);
         return ResponseEntity.ok(petResponse);
     }
 
-    @DeleteMapping("/{petId}")
-    public ResponseEntity<Void> deletePet(@PathVariable(name = "petId") Long petId) {
-        petService.deletePet(petId);
-        return ResponseEntity.noContent().build();
+    @GetMapping("/search")
+    public ResponseEntity<Page<PetResponse>> searchPets(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String species,
+            @RequestParam(required = false) String breed,
+            @RequestParam(required = false) String color,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateOfBirth,
+            Pageable pageable) {
+        log.debug("Received request to search pets with parameters: name={}, species={}, breed={}, color={}, dateOfBirth={}",
+                name, species, breed, color, dateOfBirth);
+        Page<PetResponse> pets = petService.searchPets(name, species, breed, color, dateOfBirth, pageable);
+        log.info("Pets search completed. Found {} pets.", pets.getTotalElements());
+        return ResponseEntity.ok(pets);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updatePet(@PathVariable Long id, @Valid @RequestBody PetRequest petRequest) {
+        log.debug("Received request to update pet with id: {}", id);
+        petService.updatePet(id, petRequest);
+        log.info("Pet updated successfully with id: {}", id);
+        return ResponseEntity.ok("Pet updated successfully.");
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletePet(@PathVariable Long id) {
+        log.debug("Received request to delete pet with id: {}", id);
+        petService.deletePet(id);
+        log.info("Pet deleted successfully with id: {}", id);
+        return ResponseEntity.ok("Pet deleted successfully.");
     }
 
 }
