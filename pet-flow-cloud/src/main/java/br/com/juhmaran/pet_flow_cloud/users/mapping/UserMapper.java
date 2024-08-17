@@ -1,7 +1,7 @@
 package br.com.juhmaran.pet_flow_cloud.users.mapping;
 
-import br.com.juhmaran.pet_flow_cloud.users.UserRequest;
-import br.com.juhmaran.pet_flow_cloud.users.UserResponse;
+import br.com.juhmaran.pet_flow_cloud.users.dto.UserRequest;
+import br.com.juhmaran.pet_flow_cloud.users.dto.UserResponse;
 import br.com.juhmaran.pet_flow_cloud.users.entities.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

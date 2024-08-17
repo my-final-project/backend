@@ -1,4 +1,4 @@
-package br.com.juhmaran.pet_flow_cloud.users;
+package br.com.juhmaran.pet_flow_cloud.users.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
