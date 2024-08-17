@@ -1,0 +1,13 @@
+### Cadastrar usuário e enviar email de confirmação
+POST http://localhost:8081/users
+Accept-Language: en
+Content-Type: application/json
+
+{
+  "name": "Juliane Maran",
+  "email": "julianemaran@gmail.com",
+  "password": "P4$$w0rd",
+  "confirmPassword": "P4$$w0rd",
+  "cpf": "060.690.439-52",
+  "phoneNumber": "+5541992199488"
+}
