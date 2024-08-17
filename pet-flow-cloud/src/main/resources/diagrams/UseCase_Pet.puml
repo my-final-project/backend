@@ -1,94 +1,20 @@
 @startuml
 
-package br.com.juhmaran.pet_flow_cloud.pets.entities {
-    class Pet {
-        Long id
-        String name
-        String species
-        String breed
-        String color
-        LocalDate dateOfBirth
-        OffsetDateTime createdDate
-        OffsetDateTime lastModifiedDate
-    }
-}
+!define RECTANGLE class
+left to right direction
 
-package br.com.juhmaran.pet_flow_cloud.pets.dto {
-    class PetRequest {
-        String name
-        String species
-        String breed
-        String color
-        LocalDate dateOfBirth
-    }
+actor User as U
 
-    class PetResponse {
-        Long id
-        String name
-        String species
-        String breed
-        String color
-        LocalDate dateOfBirth
-        OffsetDateTime createdDate
-        OffsetDateTime lastModifiedDate
-    }
-}
+usecase "Create Pet" as UC_CreatePet
+usecase "Update Pet" as UC_UpdatePet
+usecase "Search Pets" as UC_SearchPets
+usecase "Get Pet by ID" as UC_GetPetById
+usecase "Delete Pet" as UC_DeletePet
 
-package br.com.juhmaran.pet_flow_cloud.pets.repositories {
-    interface PetRepository {
-        + save(Pet): Pet
-        + findById(Long): Optional<Pet>
-        + delete(Pet)
-    }
-}
-
-package br.com.juhmaran.pet_flow_cloud.pets.mapping {
-    class PetMapper {
-        + toEntity(PetRequest): Pet
-        + toResponse(Pet): PetResponse
-    }
-}
-
-package br.com.juhmaran.pet_flow_cloud.pets.services {
-    class PetService {
-        - PetMapper petMapper
-        - PetRepository petRepository
-        + createPet(PetRequest): PetResponse
-        + updatePet(Long, PetRequest): PetResponse
-        + getPetById(Long): PetResponse
-        + searchPets(String, String, String, String, LocalDate, Pageable): Page<PetResponse>
-        + deletePet(Long)
-    }
-}
-
-package br.com.juhmaran.pet_flow_cloud.pets.controllers {
-    class PetController {
-        - PetService petService
-        + createPet(PetRequest): ResponseEntity<PetResponse>
-        + getPetById(Long): ResponseEntity<PetResponse>
-        + searchPets(String, String, String, String, LocalDate, Pageable): ResponseEntity<Page<PetResponse>>
-        + updatePet(Long, PetRequest): ResponseEntity<String>
-        + deletePet(Long): ResponseEntity<String>
-    }
-}
-
-package br.com.juhmaran.pet_flow_cloud.exceptions {
-    class ResourceNotFoundException extends RuntimeException {
-        - String message
-    }
-}
-
-PetService --> PetRepository
-PetService --> PetMapper
-PetService --> Pet
-PetService --> PetRequest
-PetService --> PetResponse
-PetService --> ResourceNotFoundException
-
-PetController --> PetService
-PetRepository --> Pet
-PetMapper --> Pet
-PetMapper --> PetRequest
-PetMapper --> PetResponse
+U --> UC_CreatePet : "Submits Pet Data"
+U --> UC_UpdatePet : "Updates Pet Data"
+U --> UC_SearchPets : "Searches for Pets"
+U --> UC_GetPetById : "Fetches Pet by ID"
+U --> UC_DeletePet : "Deletes a Pet"
 
 @enduml
