@@ -1,8 +1,5 @@
 server:
   port: 8081
-  error:
-    whitelabel:
-      enabled: true
 
 spring:
   application:
@@ -12,14 +9,8 @@ spring:
     show-sql: false
     hibernate:
       ddl-auto: update
-  profiles:
-    active: test
 
-logging:
-  level: DEBUG
-  root: INFO
-  org.springframework: DEBUG
-  org.hibernate: ERROR
-  org.testcontainers: DEBUG
+  #logging:
+  #  org.testcontainers: DEBUG
 
   
