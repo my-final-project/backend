@@ -1,5 +1,10 @@
-package br.com.juhmaran.pet_flow_cloud.service;
+package br.com.juhmaran.pet_flow_cloud.service.services;
 
+import br.com.juhmaran.pet_flow_cloud.service.dto.ServiceRequest;
+import br.com.juhmaran.pet_flow_cloud.service.dto.ServiceResponse;
+import br.com.juhmaran.pet_flow_cloud.service.entities.Services;
+import br.com.juhmaran.pet_flow_cloud.service.mapping.ServiceMapper;
+import br.com.juhmaran.pet_flow_cloud.service.repositories.ServiceRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,30 +21,30 @@ public class ServiceService {
     private final ServiceRepository serviceRepository;
 
     public List<ServiceResponse> getAllServices() {
-        List<Service> services = serviceRepository.findAll();
+        List<Services> services = serviceRepository.findAll();
         return serviceMapper.toResponseList(services);
     }
 
     public ServiceResponse getServiceById(Long id) {
-        Optional<Service> service = serviceRepository.findById(id);
+        Optional<Services> service = serviceRepository.findById(id);
         return service.map(serviceMapper::toResponse).orElse(null);
     }
 
     public ServiceResponse createService(ServiceRequest serviceRequest) {
-        Service service = serviceMapper.toEntity(serviceRequest);
-        service = serviceRepository.save(service);
-        return serviceMapper.toResponse(service);
+        Services services = serviceMapper.toEntity(serviceRequest);
+        services = serviceRepository.save(services);
+        return serviceMapper.toResponse(services);
     }
 
     public ServiceResponse updateService(Long id, ServiceRequest serviceRequest) {
-        Optional<Service> optionalService = serviceRepository.findById(id);
+        Optional<Services> optionalService = serviceRepository.findById(id);
         if (optionalService.isPresent()) {
-            Service service = optionalService.get();
-            service.setName(serviceRequest.getName());
-            service.setPrice(serviceRequest.getPrice());
-            service.setDescription(serviceRequest.getDescription());
-            service = serviceRepository.save(service);
-            return serviceMapper.toResponse(service);
+            Services services = optionalService.get();
+            services.setName(serviceRequest.getName());
+            services.setPrice(serviceRequest.getPrice());
+            services.setDescription(serviceRequest.getDescription());
+            services = serviceRepository.save(services);
+            return serviceMapper.toResponse(services);
         }
         return null;
     }

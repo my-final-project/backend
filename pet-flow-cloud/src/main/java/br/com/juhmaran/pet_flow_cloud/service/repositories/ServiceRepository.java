@@ -1,6 +1,7 @@
-package br.com.juhmaran.pet_flow_cloud.service;
+package br.com.juhmaran.pet_flow_cloud.service.repositories;
 
+import br.com.juhmaran.pet_flow_cloud.service.entities.Services;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ServiceRepository extends JpaRepository<Service, Long> {
+public interface ServiceRepository extends JpaRepository<Services, Long> {
 }
