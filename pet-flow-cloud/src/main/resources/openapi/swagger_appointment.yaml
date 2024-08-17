@@ -1,9 +1,168 @@
 openapi: 3.0.3
 info:
-  title: $Title$
-  description: $Title$
+  title: API de Agendamento
+  description: API para gerenciamento de Agendamentos
   version: 1.0.0
 servers:
-  - url: '$https$'
+  - url: 'http://localhost:8081'
+tags:
+  - name: Appointment
+    description: Operações relacionadas a agendamentos
 paths:
-  $END$
+  /appointments:
+    get:
+      tags:
+        - Appointment
+      summary: Lista todos os agendamentos
+      responses:
+        '200':
+          description: Lista de agendamentos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AppointmentResponse'
+    post:
+      tags:
+        - Appointment
+      summary: Cria um novo agendamento
+      requestBody:
+        description: Dados do novo agendamento
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppointmentRequest'
+      responses:
+        '201':
+          description: Agendamento criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentResponse'
+  /appointments/{id}:
+    get:
+      tags:
+        - Appointment
+      summary: Obtém um agendamento pelo ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Agendamento encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentResponse'
+        '404':
+          description: Agendamento não encontrado
+    put:
+      tags:
+        - Appointment
+      summary: Atualiza um agendamento existente
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Dados do agendamento a serem atualizados
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppointmentRequest'
+      responses:
+        '200':
+          description: Agendamento atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentResponse'
+        '404':
+          description: Agendamento não encontrado
+    delete:
+      tags:
+        - Appointment
+      summary: Deleta um agendamento pelo ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Agendamento deletado com sucesso
+        '404':
+          description: Agendamento não encontrado
+components:
+  schemas:
+    AppointmentRequest:
+      type: object
+      properties:
+        userId:
+          type: integer
+          description: ID do usuário
+          example: 1
+        petId:
+          type: integer
+          description: ID do pet
+          example: 2
+        serviceId:
+          type: integer
+          description: ID do serviço
+          example: 3
+        appointmentDate:
+          type: string
+          format: date-time
+          description: Data do agendamento
+          example: 2023-08-17T19:06:00Z
+        status:
+          type: string
+          description: Status do agendamento
+          example: Pendente
+    AppointmentResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID do agendamento
+          example: 1
+        userId:
+          type: integer
+          description: ID do usuário
+          example: 1
+        petId:
+          type: integer
+          description: ID do pet
+          example: 2
+        serviceId:
+          type: integer
+          description: ID do serviço
+          example: 3
+        appointmentDate:
+          type: string
+          format: date-time
+          description: Data do agendamento
+          example: 2023-08-17T19:06:00Z
+        status:
+          type: string
+          description: Status do agendamento
+          example: Pendente
+        created_date:
+          type: string
+          format: date-time
+          description: Data de criação do agendamento
+          example: 2023-08-17T19:06:00Z
+        last_modified_date:
+          type: string
+          format: date-time
+          description: Data da última modificação do agendamento
+          example: 2023-08-17T19:06:00Z
