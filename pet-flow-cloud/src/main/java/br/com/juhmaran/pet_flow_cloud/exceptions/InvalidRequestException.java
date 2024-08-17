@@ -1,4 +1,4 @@
-package br.com.juhmaran.pet_flow_cloud.exceptions.runtimes;
+package br.com.juhmaran.pet_flow_cloud.exceptions;
 
 public class InvalidRequestException extends RuntimeException {
 
