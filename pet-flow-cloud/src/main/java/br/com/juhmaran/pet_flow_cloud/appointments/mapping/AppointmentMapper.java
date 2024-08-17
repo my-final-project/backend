@@ -1,5 +1,8 @@
-package br.com.juhmaran.pet_flow_cloud.appointments;
+package br.com.juhmaran.pet_flow_cloud.appointments.mapping;
 
+import br.com.juhmaran.pet_flow_cloud.appointments.entities.Appointment;
+import br.com.juhmaran.pet_flow_cloud.appointments.dto.AppointmentRequest;
+import br.com.juhmaran.pet_flow_cloud.appointments.dto.AppointmentResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
