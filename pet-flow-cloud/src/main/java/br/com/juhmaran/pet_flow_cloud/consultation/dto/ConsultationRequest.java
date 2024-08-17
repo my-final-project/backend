@@ -1,4 +1,4 @@
-package br.com.juhmaran.pet_flow_cloud.consultation;
+package br.com.juhmaran.pet_flow_cloud.consultation.dto;
 
 import lombok.*;
 
@@ -18,4 +18,5 @@ public class ConsultationRequest {
     private Long veterinarianId;
     private OffsetDateTime consultationDate;
     private String notes;
+
 }
