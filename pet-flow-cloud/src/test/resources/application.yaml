@@ -15,10 +15,11 @@ spring:
   profiles:
     active: test
 
-#logging:
-#  level: DEBUG
-#  root: INFO
-#  org.springframework: DEBUG
-#  org.hibernate: ERROR
-#  org.testcontainers: DEBUG
-
+logging:
+  level:
+    web: DEBUG
+    root: INFO
+    org.springframework: DEBUG
+    org.hibernate: ERROR
+    org.testcontainers: DEBUG
+    br.com.juhmaran.pet_flow_cloud: DEBUG
