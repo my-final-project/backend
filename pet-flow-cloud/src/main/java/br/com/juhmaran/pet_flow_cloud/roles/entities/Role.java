@@ -12,7 +12,9 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "roles")
+@Table(name = "roles", uniqueConstraints = {
+        @UniqueConstraint(name = "uk_name", columnNames = "name")
+})
 public class Role extends BaseEntity implements Serializable {
 
     @Enumerated(EnumType.STRING)
