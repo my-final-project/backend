@@ -67,6 +67,10 @@ spring:
       client:
         default-config:
           connect-timeout: 5000
+  security:
+    user:
+      name: admin
+      password: admin
 
 mail:
   from:
@@ -97,12 +101,12 @@ springdoc:
     path: /docs-petflowcloud.html
     operations-sorter: method
     tags-sorter: alpha
-#    csrf:
-#      enabled: false
-#      use-local-storage: false
-#      use-session-storage: false
-#      cookie-name: 'XSRF-TOKEN'
-#      header-name: 'X-XSRF-TOKEN'
+    csrf:
+      enabled: false
+      use-local-storage: false
+      use-session-storage: false
+      cookie-name: 'XSRF-TOKEN'
+      header-name: 'X-XSRF-TOKEN'
 #  packages-to-scan: br.com.juhmaran.pet_flow_cloud.user.controllers
 
 management:
