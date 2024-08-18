@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -16,7 +18,7 @@ public class TokenResponse {
     private String accessToken;
 
     @JsonProperty("tokent_type")
-    private String tokentType;
+    private String tokenType;
 
     @JsonProperty("expires_in")
     private long expiresIn;
@@ -27,4 +29,13 @@ public class TokenResponse {
     @JsonProperty("purpose")
     private String purpose;
 
+    private String username;
+
+    private String email;
+
+    private List<String> roles;
+
+    public TokenResponse(String accessToken) {
+        this.accessToken = accessToken;
+    }
 }
