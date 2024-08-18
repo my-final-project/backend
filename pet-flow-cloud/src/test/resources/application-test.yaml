@@ -10,7 +10,7 @@ spring:
     hibernate:
       ddl-auto: update
 
-  #logging:
-  #  org.testcontainers: DEBUG
-
+logging:
+  level:
+    org.testcontainers: DEBUG
   

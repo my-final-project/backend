@@ -1,47 +1,52 @@
 package br.com.juhmaran.pet_flow_cloud.users.entities;
 
+import br.com.juhmaran.pet_flow_cloud.utils.base.BaseEntity;
+import br.com.juhmaran.pet_flow_cloud.roles.entities.Role;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import java.io.Serializable;
-import java.time.OffsetDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
+@ToString
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "users")
-public class User implements Serializable {
+@Table(name = "users", uniqueConstraints = {
+        @UniqueConstraint(name = "uk_email", columnNames = "email"),
+        @UniqueConstraint(name = "uk_cpf", columnNames = "cpf")
+})
+public class User extends BaseEntity implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false, length = 150)
+    @Column(name = "name", nullable = false, length = 150)
     private String name;
 
-    @Column(nullable = false, unique = true, length = 11)
+    @Column(name = "cpf", nullable = false, unique = true, length = 11)
     private String cpf;
 
-    @Column(nullable = false, unique = true, length = 150)
+    @Column(name = "email", nullable = false, unique = true, length = 150)
     private String email;
 
-    @Column(nullable = false, length = 200)
+    @Column(name = "password", nullable = false, length = 200)
     private String password;
 
-    @Transient
-    private String confirmPassword;
+    @Builder.Default
+    @Enumerated(EnumType.STRING)
+    private UserStatus status = UserStatus.ACTIVE;
 
-    @CreatedDate
-    @Column(name = "created_date", updatable = false)
-    private OffsetDateTime createdDate;
-
-    @LastModifiedDate
-    @Column(name = "last_modified_date")
-    private OffsetDateTime lastModifiedDate;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"),
+            foreignKey = @ForeignKey(name = "FK_user_role"),
+            inverseForeignKey = @ForeignKey(name = "FK_role_user")
+    )
+    @Builder.Default
+    private Set<Role> roles = new HashSet<>();
 
 }
