@@ -1,4 +1,4 @@
-package br.com.juhmaran.pet_flow_cloud.base;
+package br.com.juhmaran.pet_flow_cloud.utils.base;
 
 import jakarta.persistence.*;
 import lombok.Getter;
