@@ -4,7 +4,6 @@ import br.com.juhmaran.pet_flow_cloud.service.dto.ServiceRequest;
 import br.com.juhmaran.pet_flow_cloud.service.dto.ServiceResponse;
 import br.com.juhmaran.pet_flow_cloud.service.entities.Services;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
@@ -17,7 +16,6 @@ public interface ServiceMapper {
 
     ServiceMapper INSTANCE = Mappers.getMapper(ServiceMapper.class);
 
-    @Mapping(target = "id", ignore = true)
     Services toEntity(ServiceRequest serviceRequest);
 
     ServiceResponse toResponse(Services services);

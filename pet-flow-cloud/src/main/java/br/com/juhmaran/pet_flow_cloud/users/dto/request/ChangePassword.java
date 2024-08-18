@@ -14,18 +14,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ChangePassword {
 
-    @NotBlank(message = "O campo senha atual é obrigatório e não pode estar em branco.")
-    @Size(min = 8, max = 50, message = "A senha atual deve ter no mínimo {min} e no máximo {max} caracteres.")
+    @NotBlank(message = "field.required.not_blank")
+    @Size(min = 8, max = 50, message = "field.min_max.size")
     private String currentPassword;
 
-    @NotBlank(message = "O campo nova senha é obrigatório e não pode estar em branco.")
-    @Size(min = 8, max = 50, message = "A nova senha deve ter no mínimo {min} e no máximo {max} caracteres.")
+    @NotBlank(message = "field.required.not_blank")
+    @Size(min = 8, max = 50, message = "field.min_max.size")
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{8,}$",
-            message = "A nova senha deve ter no mínimo: 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere especial.")
+            message = "field.password.pattern")
     private String newPassword;
 
-    @NotBlank(message = "O campo confirmar senha é obrigatório e não pode estar em branco.")
-    @Size(min = 8, max = 50, message = "A confirmação da senha deve ter no mínimo {min} e no máximo {max} caracteres.")
+    @NotBlank(message = "field.required.not_blank")
+    @Size(min = 8, max = 50, message = "field.min_max.size")
     private String confirmPassword;
 
 }

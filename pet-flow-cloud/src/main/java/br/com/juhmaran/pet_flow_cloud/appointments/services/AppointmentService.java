@@ -22,31 +22,31 @@ public class AppointmentService {
     private final AppointmentRepository appointmentRepository;
 
     public List<AppointmentResponse> getAllAppointments() {
-        log.info("Fetching all appointments.");
+        log.info("### [AppointmentService] - Fetching all appointments.");
         List<Appointment> appointments = appointmentRepository.findAll();
         return appointmentMapper.toResponseList(appointments);
     }
 
     public AppointmentResponse getAppointmentById(Long id) {
-        log.info("Fetching appointment with ID: {}", id);
+        log.info("### [AppointmentService] - Fetching appointment with ID: {}", id);
         Optional<Appointment> appointment = appointmentRepository.findById(id);
 
         if (appointment.isPresent()) {
             return appointmentMapper.toResponse(appointment.get());
         }
-        log.error("Appointment with ID: {} not found", id);
+        log.error("### [AppointmentService] - Appointment with ID: {} not found", id);
         throw new ResourceNotFoundException("Appointment not found with ID: " + id);
     }
 
     public AppointmentResponse createAppointment(AppointmentRequest appointmentRequest) {
-        log.info("Creating new appointment");
+        log.info("### [AppointmentService] - Creating new appointment");
         Appointment appointment = appointmentMapper.toEntity(appointmentRequest);
         appointment = appointmentRepository.save(appointment);
         return appointmentMapper.toResponse(appointment);
     }
 
     public AppointmentResponse updateAppointment(Long id, AppointmentRequest appointmentRequest) {
-        log.info("Updating appointment with ID: {}", id);
+        log.info("### [AppointmentService] - Updating appointment with ID: {}", id);
         Optional<Appointment> optionalAppointment = appointmentRepository.findById(id);
         if (optionalAppointment.isPresent()) {
             Appointment appointment = optionalAppointment.get();
@@ -58,17 +58,17 @@ public class AppointmentService {
             appointment = appointmentRepository.save(appointment);
             return appointmentMapper.toResponse(appointment);
         } else {
-            log.error("Appointment with ID: {} not found", id);
+            log.error("### [AppointmentService] - Appointment with ID: {} not found", id);
             throw new ResourceNotFoundException("Appointment not found with ID: " + id);
         }
     }
 
     public void deleteAppointment(Long id) {
-        log.info("Deleting appointment with ID: {}", id);
+        log.info("### [AppointmentService] - Deleting appointment with ID: {}", id);
         if (appointmentRepository.existsById(id)) {
             appointmentRepository.deleteById(id);
         } else {
-            log.error("Appointment with ID: {} not found", id);
+            log.error("### [AppointmentService] - Appointment with ID: {} not found", id);
             throw new ResourceNotFoundException("Appointment not found with ID: " + id);
         }
     }

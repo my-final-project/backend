@@ -1,18 +1,19 @@
 package br.com.juhmaran.pet_flow_cloud.roles.entities;
 
+import br.com.juhmaran.pet_flow_cloud.utils.enums.EnumUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum RoleType {
+public enum RoleType implements EnumUtils.HasMessageKey {
 
-    ADMIN("Administrador do Sistema."),
-    USER("Usuário padrão."),
-    OWNER("Proprietário do PetShop."),
-    EMPLOYEE("Funcionário do PetShop."),
-    VETERINARIAN("Médico Veterinário.");
+    ADMIN("role.admin"), // Administrador do Sistema.
+    USER("role.user"), // Usuário padrão.
+    OWNER("role.owner"), // Proprietário do PetShop.
+    EMPLOYEE("role.employee"), // Funcionário do PetShop.
+    VETERINARIAN("role.veterinarian"); // Médico Veterinário.
 
-    private final String description;
+    private final String messageKey;
 
 }

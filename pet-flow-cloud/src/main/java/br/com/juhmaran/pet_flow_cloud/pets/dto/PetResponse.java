@@ -18,18 +18,19 @@ import java.time.OffsetDateTime;
 public class PetResponse {
 
     private Long id;
-
     private String name;
-
     private String species; // espécie
-
     private String breed; // raça
-
     private String color;
 
     @JsonProperty("date_of_birth")
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
     private LocalDate dateOfBirth;
+
+    private Integer age;
+
+    @JsonProperty("owner_id")
+    private Long ownerId;
 
     @JsonProperty("created_date")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm", shape = JsonFormat.Shape.STRING)
