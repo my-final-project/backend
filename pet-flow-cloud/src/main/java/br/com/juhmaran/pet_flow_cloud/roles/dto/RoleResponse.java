@@ -1,5 +1,6 @@
-package br.com.juhmaran.pet_flow_cloud.roles;
+package br.com.juhmaran.pet_flow_cloud.roles.dto;
 
+import br.com.juhmaran.pet_flow_cloud.roles.entities.RoleType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
@@ -19,9 +20,9 @@ public class RoleResponse {
     private String description;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private OffsetDateTime createdAt;
+    public OffsetDateTime createdDate;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private OffsetDateTime updatedAt;
+    public OffsetDateTime lastModifiedDate;
 
 }
