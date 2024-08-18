@@ -1,13 +1,13 @@
 package br.com.juhmaran.pet_flow_cloud.users.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import br.com.juhmaran.pet_flow_cloud.users.entities.UserStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.OffsetDateTime;
+import java.util.Set;
 
 @Data
 @Builder
@@ -23,12 +23,12 @@ public class UserResponse {
 
     private String email;
 
-    @JsonProperty("created_date")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", shape = JsonFormat.Shape.STRING)
+    private UserStatus status;
+
+    private Set<String> roles;
+
     private OffsetDateTime createdDate;
 
-    @JsonProperty("last_modified_date")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", shape = JsonFormat.Shape.STRING)
     private OffsetDateTime lastModifiedDate;
 
 }
