@@ -17,15 +17,11 @@ public interface PetMapper {
 
     PetMapper INSTANCE = Mappers.getMapper(PetMapper.class);
 
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createdDate", ignore = true)
-    @Mapping(target = "lastModifiedDate", ignore = true)
     @Mapping(target = "dateOfBirth", dateFormat = "yyyy-MM-dd")
     Pet toEntity(PetRequest petRequest);
 
+    @Mapping(target = "age", expression = "java(pet.getAge())")
     @Mapping(target = "dateOfBirth", dateFormat = "yyyy-MM-dd")
-    @Mapping(target = "createdDate", dateFormat = "yyyy-MM-dd HH:mm")
-    @Mapping(target = "lastModifiedDate", dateFormat = "yyyy-MM-dd HH:mm")
     PetResponse toResponse(Pet pet);
 
     List<PetResponse> toResponseList(List<Pet> pets);

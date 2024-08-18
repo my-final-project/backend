@@ -4,6 +4,8 @@ import jakarta.validation.constraints.*;
 import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @Builder
@@ -11,35 +13,35 @@ import org.hibernate.validator.constraints.br.CPF;
 @NoArgsConstructor
 public class UserRequest {
 
-    @NotNull(message = "O nome é obrigatório e não pode ser nulo.")
-    @NotBlank(message = "O nome é obrigatório e não pode estar em branco.")
-    @Size(min = 3, max = 150, message = "O nome deve ter no mínimo 3 e no máximo 150 caracteres.")
+    @NotNull(message = "field.required.not_null")
+    @NotBlank(message = "field.required.not_blank")
+    @Size(min = 3, max = 150, message = "field.min_max.size")
     private String name;
 
-    // @Pattern(regexp = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}", message = "O CPF deve estar no formato: xxx.xxx.xxx-xx.")
-    @NotNull(message = "O CPF é obrigatório e não pode ser nulo.")
-    @NotBlank(message = "O CPF é obrigatório e não pode estar em branco.")
-    @CPF(message = "O CPF deve ser um número válido.")
+    @CPF(message = "field.cpf.invalid")
+    @NotNull(message = "field.required.not_null")
+    @NotBlank(message = "field.required.not_blank")
+    @Pattern(regexp = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}", message = "field.pattern")
     private String cpf;
 
-    @NotNull(message = "O email é obrigatório e não pode ser nulo.")
-    @NotBlank(message = "O email é obrigatório e não pode estar em branco.")
-    @Email(message = "O email deve ser válido.")
-    @Size(max = 150, message = "O email deve ter no máximo 150 caracteres.")
+    @NotNull(message = "field.required.not_null")
+    @NotBlank(message = "field.required.not_blank")
+    @Email(message = "field.email.invalid")
+    @Size(max = 150, message = "field.max.size")
     private String email;
 
-    @NotNull(message = "A senha é obrigatória e não pode ser nula.")
-    @NotBlank(message = "A senha é obrigatória e não pode estar em branco.")
-    @Size(min = 8, max = 50, message = "A senha deve ter no mínimo 8 e no máximo 50 caracteres.")
+    @NotNull(message = "field.required.not_null")
+    @NotBlank(message = "field.required.not_blank")
+    @Size(min = 8, max = 50, message = "field.min_max.size")
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{8,}$",
-            message = "A senha deve ter no mínimo: 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere especial.")
+            message = "field.password.pattern")
     private String password;
 
-    @NotNull(message = "A confirmação da senha é obrigatória e não pode ser nula.")
-    @NotBlank(message = "A confirmação da senha é obrigatória e não pode estar em branco.")
-    @Size(min = 8, max = 50, message = "A confirmação da senha deve ter no mínimo 8 e no máximo 50 caracteres.")
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{8,}$",
-            message = "A confirmação da senha deve ser idêntica à senha.")
+    @NotNull(message = "field.required.not_null")
+    @NotBlank(message = "field.required.not_blank")
+    @Size(min = 8, max = 50, message = "field.min_max.size")
     private String confirmPassword;
+
+    private Set<Long> petsId;
 
 }

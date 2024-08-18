@@ -4,6 +4,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.hibernate.validator.constraints.br.CPF;
 
 @Getter
 @Setter
@@ -12,15 +13,15 @@ import lombok.*;
 @NoArgsConstructor
 public class UserUpdateRequest {
 
-    @Size(min = 3, max = 150, message = "O nome deve ter no mínimo 3 e no máximo 150 caracteres.")
+    @Size(min = 3, max = 150, message = "field.min_max.size")
     private String name;
 
-    @Pattern(regexp = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}",
-            message = "O CPF deve estar no formato: xxx.xxx.xxx-xx.")
+    @CPF(message = "field.cpf.invalid")
+    @Pattern(regexp = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}", message = "field.pattern")
     private String cpf;
 
-    @Email(message = "O email deve ser válido.")
-    @Size(max = 150, message = "O email deve ter no máximo 150 caracteres.")
+    @Email(message = "field.email.invalid")
+    @Size(max = 150, message = "field.max.size")
     private String email;
 
 }

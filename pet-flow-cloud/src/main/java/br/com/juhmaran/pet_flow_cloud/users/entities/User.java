@@ -1,7 +1,8 @@
 package br.com.juhmaran.pet_flow_cloud.users.entities;
 
-import br.com.juhmaran.pet_flow_cloud.utils.base.BaseEntity;
+import br.com.juhmaran.pet_flow_cloud.pets.entities.Pet;
 import br.com.juhmaran.pet_flow_cloud.roles.entities.Role;
+import br.com.juhmaran.pet_flow_cloud.utils.base.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,7 +12,6 @@ import java.util.Set;
 
 @Getter
 @Setter
-@ToString
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -48,5 +48,11 @@ public class User extends BaseEntity implements Serializable {
     )
     @Builder.Default
     private Set<Role> roles = new HashSet<>();
+
+    @OneToMany(
+            mappedBy = "owner",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private Set<Pet> pets = new HashSet<>();
 
 }

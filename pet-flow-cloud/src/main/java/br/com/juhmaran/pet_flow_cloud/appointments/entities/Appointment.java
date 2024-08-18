@@ -1,9 +1,10 @@
 package br.com.juhmaran.pet_flow_cloud.appointments.entities;
 
-import jakarta.persistence.*;
+import br.com.juhmaran.pet_flow_cloud.utils.base.BaseEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
@@ -15,11 +16,7 @@ import java.time.OffsetDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "appointments")
-public class Appointment implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Appointment extends BaseEntity implements Serializable {
 
     @Column(nullable = false, name = "user_id")
     private Long userId;
@@ -35,13 +32,5 @@ public class Appointment implements Serializable {
 
     @Column(nullable = false)
     private String status;
-
-    @CreatedDate
-    @Column(name = "created_date", updatable = false)
-    private OffsetDateTime createdDate;
-
-    @LastModifiedDate
-    @Column(name = "last_modified_date")
-    private OffsetDateTime lastModifiedDate;
 
 }

@@ -28,6 +28,8 @@ public class UserResponse {
 
     private Set<String> roles;
 
+    private Set<Long> petsId;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public OffsetDateTime createdDate;
 

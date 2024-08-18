@@ -1,15 +1,13 @@
 package br.com.juhmaran.pet_flow_cloud.pets.entities;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import br.com.juhmaran.pet_flow_cloud.users.entities.User;
+import br.com.juhmaran.pet_flow_cloud.utils.base.BaseEntity;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Past;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
+import java.time.Period;
 
 /**
  * Representa o animal de estimação do usuário
@@ -21,37 +19,35 @@ import java.time.OffsetDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "pets")
-public class Pet implements Serializable {
+public class Pet extends BaseEntity implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false, length = 80)
+    @Column(name = "name", nullable = false, length = 150)
     private String name;
 
-    @Column(nullable = false, length = 80)
+    @Column(name = "species", nullable = false, length = 50)
     private String species; // espécie
 
-    @Column(length = 80)
+    @Column(name = "breed", length = 80)
     private String breed; // raça
 
-    @Column(length = 20)
+    @Column(name = "color", length = 20)
     private String color;
 
     @Transient
-    private int age;
+    private Integer age;
 
-    @Past(message = "A data de nascimento deve estar no passado.")
-    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
+    @ManyToOne
+    @JoinColumn(
+            nullable = false,
+            foreignKey = @ForeignKey(name = "FK_pet_user")
+    )
+    private User owner;
+
+    @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
-    @CreatedDate
-    @Column(name = "created_date", updatable = false)
-    private OffsetDateTime createdDate;
-
-    @LastModifiedDate
-    @Column(name = "last_modified_date")
-    private OffsetDateTime lastModifiedDate;
+    public Integer getAge() {
+        return Period.between(this.dateOfBirth, LocalDate.now()).getYears();
+    }
 
 }
