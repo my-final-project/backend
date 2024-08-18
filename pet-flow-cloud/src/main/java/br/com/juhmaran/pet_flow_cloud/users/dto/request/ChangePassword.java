@@ -1,7 +1,6 @@
-package br.com.juhmaran.pet_flow_cloud.users.dto;
+package br.com.juhmaran.pet_flow_cloud.users.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -15,25 +14,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ChangePassword {
 
-    @NotNull(message = "A senha atual é obrigatória e não pode ser nula.")
-    @NotBlank(message = "A senha atual é obrigatória e não pode estar em branco.")
-    @Size(min = 8, max = 50, message = "A senha deve ter no mínimo 8 e no máximo 50 caracteres.")
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{8,}$",
-            message = "A senha atual deve ter no mínimo: 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere especial.")
+    @NotBlank(message = "O campo senha atual é obrigatório e não pode estar em branco.")
+    @Size(min = 8, max = 50, message = "A senha atual deve ter no mínimo {min} e no máximo {max} caracteres.")
     private String currentPassword;
 
-    @NotNull(message = "A nova senha é obrigatória e não pode ser nula.")
-    @NotBlank(message = "A nova senha é obrigatória e não pode estar em branco.")
-    @Size(min = 8, max = 50, message = "A senha deve ter no mínimo 8 e no máximo 50 caracteres.")
+    @NotBlank(message = "O campo nova senha é obrigatório e não pode estar em branco.")
+    @Size(min = 8, max = 50, message = "A nova senha deve ter no mínimo {min} e no máximo {max} caracteres.")
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{8,}$",
-            message = "A senha deve ter no mínimo: 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere especial.")
+            message = "A nova senha deve ter no mínimo: 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere especial.")
     private String newPassword;
 
-    @NotNull(message = "A confirmação da senha é obrigatória e não pode ser nula.")
-    @NotBlank(message = "A confirmação da senha é obrigatória e não pode estar em branco.")
-    @Size(min = 8, max = 50, message = "A confirmação da senha deve ter no mínimo 8 e no máximo 50 caracteres.")
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{8,}$",
-            message = "A confirmação da senha deve ser idêntica à senha.")
+    @NotBlank(message = "O campo confirmar senha é obrigatório e não pode estar em branco.")
+    @Size(min = 8, max = 50, message = "A confirmação da senha deve ter no mínimo {min} e no máximo {max} caracteres.")
     private String confirmPassword;
 
 }

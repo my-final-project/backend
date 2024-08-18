@@ -1,6 +1,7 @@
-package br.com.juhmaran.pet_flow_cloud.users.dto;
+package br.com.juhmaran.pet_flow_cloud.users.dto.response;
 
 import br.com.juhmaran.pet_flow_cloud.users.entities.UserStatus;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,8 +28,9 @@ public class UserResponse {
 
     private Set<String> roles;
 
-    private OffsetDateTime createdDate;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    public OffsetDateTime createdDate;
 
-    private OffsetDateTime lastModifiedDate;
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    public OffsetDateTime lastModifiedDate;
 }

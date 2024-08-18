@@ -1,4 +1,4 @@
-package br.com.juhmaran.pet_flow_cloud.users.dto;
+package br.com.juhmaran.pet_flow_cloud.users.dto.request;
 
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -16,9 +16,9 @@ public class UserRequest {
     @Size(min = 3, max = 150, message = "O nome deve ter no mínimo 3 e no máximo 150 caracteres.")
     private String name;
 
+    // @Pattern(regexp = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}", message = "O CPF deve estar no formato: xxx.xxx.xxx-xx.")
     @NotNull(message = "O CPF é obrigatório e não pode ser nulo.")
     @NotBlank(message = "O CPF é obrigatório e não pode estar em branco.")
-    @Pattern(regexp = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}", message = "O CPF deve estar no formato: xxx.xxx.xxx-xx.")
     @CPF(message = "O CPF deve ser um número válido.")
     private String cpf;
 

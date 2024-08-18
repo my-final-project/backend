@@ -1,4 +1,4 @@
-package br.com.juhmaran.pet_flow_cloud.users.dto;
+package br.com.juhmaran.pet_flow_cloud.users.dto.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
