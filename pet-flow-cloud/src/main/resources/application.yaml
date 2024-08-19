@@ -78,10 +78,10 @@ mail:
   from:
     name: 'PetFlowCloud'
 
-#security:
-#  jwt:
-#    secret-key: '05955a2232d7f31a0a9879c9233e661f6e2923d5334ec67b7a64c79911407afc'
-#    expiration-time: 86400000
+security:
+  jwt:
+    secret-key: '05955a2232d7f31a0a9879c9233e661f6e2923d5334ec67b7a64c79911407afc'
+    expiration-time: 86400000
 
 feign:
   name: 'viacep-api'
