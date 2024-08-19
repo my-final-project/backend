@@ -17,7 +17,7 @@ public class Login {
     @NotBlank(message = "O campo e-mail não pode ser nulo ou em branco.")
     @Email(message = "Formato do e-mail está inválido.",
             regexp = "^[a-z0-9.+-]+@[a-z0-9.-]+\\.[a-z]{2,}$")
-    private String email;
+    private String username;
 
     @NotBlank(message = "O campo senha não pode ser nulo ou em branco.")
     @Size(min = 8, max = 50,
