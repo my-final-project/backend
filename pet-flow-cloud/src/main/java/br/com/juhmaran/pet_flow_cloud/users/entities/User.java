@@ -52,6 +52,7 @@ public class User extends BaseEntity implements Serializable {
     @OneToMany(
             mappedBy = "owner",
             cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
             orphanRemoval = true)
     private Set<Pet> pets = new HashSet<>();
 

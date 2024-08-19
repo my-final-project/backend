@@ -5,6 +5,11 @@ import br.com.juhmaran.pet_flow_cloud.exceptions.ConflictException;
 import br.com.juhmaran.pet_flow_cloud.exceptions.ResourceNotFoundException;
 import br.com.juhmaran.pet_flow_cloud.roles.entities.Role;
 import br.com.juhmaran.pet_flow_cloud.roles.entities.RoleType;
+import br.com.juhmaran.pet_flow_cloud.security.dto.Login;
+import br.com.juhmaran.pet_flow_cloud.security.dto.TokenResponse;
+import br.com.juhmaran.pet_flow_cloud.security.dto.UserDetailsImpl;
+import br.com.juhmaran.pet_flow_cloud.security.services.JwtService;
+import br.com.juhmaran.pet_flow_cloud.security.services.UserDetailsServiceImpl;
 import br.com.juhmaran.pet_flow_cloud.users.dto.request.ChangePassword;
 import br.com.juhmaran.pet_flow_cloud.users.dto.request.UserRequest;
 import br.com.juhmaran.pet_flow_cloud.users.dto.request.UserUpdateRequest;
@@ -20,8 +25,15 @@ import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Locale;
@@ -35,6 +47,10 @@ public class UserService {
     private final UserMapper userMapper;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+
+    private final JwtService jwtService;
+    private final UserDetailsServiceImpl userDetailsService;
+    private final AuthenticationManager authenticationManager;
 
     private final MessageSource messageSource;
 
