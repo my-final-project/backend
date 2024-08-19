@@ -37,8 +37,8 @@ public class UserRequest {
             message = "field.password.pattern")
     private String password;
 
-    @NotNull(message = "field.required.not_null")
-    @NotBlank(message = "field.required.not_blank")
+    //    @NotNull(message = "field.required.not_null")
+//    @NotBlank(message = "field.required.not_blank")
     @Size(min = 8, max = 50, message = "field.min_max.size")
     private String confirmPassword;
 

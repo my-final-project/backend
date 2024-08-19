@@ -18,7 +18,6 @@ import java.io.Serializable;
 public class Role extends BaseEntity implements Serializable {
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, unique = true)
     private RoleType name;
 
     @Column(nullable = false)

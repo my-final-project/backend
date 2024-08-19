@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,6 +35,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<String> updateUser(@PathVariable Long id,
                                              @RequestBody @Valid UserUpdateRequest userUpdateRequest) {
         log.debug("### [UserController] - Received request to update user with ID: {}", id);
@@ -46,6 +48,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}/change-password")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<String> changePassword(@PathVariable Long id,
                                                  @Valid @RequestBody ChangePassword changePassword) {
         log.debug("### [UserController] - Received request to change password for user with ID: {}", id);
@@ -58,6 +61,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<UserResponse> getUserById(@PathVariable Long id) {
         log.debug("### [UserController] - Received request to get user by ID: {}", id);
 
@@ -68,6 +72,7 @@ public class UserController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN', 'OWNER')")
     public ResponseEntity<List<UserResponse>> getAllUsers() {
         log.debug("### [UserController] - Received request to get all users");
 
@@ -78,6 +83,7 @@ public class UserController {
     }
 
     @GetMapping("/search")
+    @PreAuthorize("hasAnyRole('ADMIN', 'OWNER')")
     public ResponseEntity<Page<UserResponse>> searchUsers(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String cpf,
@@ -95,6 +101,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<String> deleteUser(@PathVariable Long id) {
         log.debug("### [UserController] - Received request to delete user with ID: {}", id);
 
