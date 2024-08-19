@@ -5,6 +5,9 @@
 * Evitar a duplicação de strings e o uso de literais mágicas.
 * Melhoria na clareza dos nomes dos métodos.
 * Redução da complexidade no método.
+* Inclusão de Logs em Inglês para melhorar o monitoramento e depuração do código.
+* Strings repetidas devem ser substituídas por constantes ou métodos
+* 
 
 ### Resumo das Refatorações:
 
@@ -14,6 +17,7 @@
 3. **Tratamento de Exceções:** Melhoramos o tratamento de exceções.
 4. **Responsabilidade Única:** Cada método agora realiza uma única tarefa, seguindo o princípio de responsabilidade
    única.
+5. **Inclusão de Logs:** Logs em inglês foram adicionados para melhor monitoramento e depuração do código.
 
 ---
 
